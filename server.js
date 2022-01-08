@@ -14,7 +14,7 @@ const app = express();
 dbConnect();
 
 //to check heroku deployment
-app.use("/", (req, res) => { res.json({msg: "Hello from Express!"}) } )
+// app.use("/", (req, res) => { res.json({msg: "Hello from Express!"}) } )
 
 
 //Middleware

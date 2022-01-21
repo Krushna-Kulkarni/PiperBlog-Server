@@ -26,7 +26,6 @@ const fetchCategoriesCtrl =expressAsyncHandler(async(req,res) =>{
     } catch (error) {
         res.json(error);
     }
-    res.json("fetch all categories");
 });
 
 

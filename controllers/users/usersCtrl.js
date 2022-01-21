@@ -60,7 +60,6 @@ const loginUserCtrl = expressAsyncHandler(async (req, res) => {
 //Users
 //-------------------------------
 const fetchUsersCtrl = expressAsyncHandler(async (req, res) => {
-  console.log(req.headers);
   try {
     const users = await User.find({});
     res.json(users);
@@ -274,7 +273,6 @@ const generateVerificationTokenCtrl = expressAsyncHandler(async (req, res) => {
     const verificationToken = await user.createAccountVerificationToken();
     //save the user
     await user.save();
-    console.log(verificationToken);
     //build your message
 
     const resetURL = `If you were requested to verify your account, verify now within 10 minutes, otherwise ignore this message <a href="http://localhost:3000/verify-account/${verificationToken}">Click to verify your account</a>`;
@@ -326,7 +324,6 @@ const forgetPasswordToken = expressAsyncHandler(async (req, res) => {
   try {
     //Create token
     const token = await user.createPasswordResetToken();
-    console.log(token);
     await user.save();
 
     //build your message

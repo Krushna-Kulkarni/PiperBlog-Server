@@ -40,7 +40,7 @@ const fetchCategoryCtrl =expressAsyncHandler(async(req,res) =>{
     } catch (error) {
         res.json(error);
     }
-    res.json("fetch single category");
+ 
 });
 
 

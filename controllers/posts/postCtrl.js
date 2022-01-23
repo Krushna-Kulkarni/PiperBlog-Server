@@ -10,7 +10,7 @@ const cloudinaryUploadImg = require("../../utils/cloudinary");
 //CREATE POST
 //----------------------------------------------------------------
 const createPostCtrl = expressAsyncHandler(async (req, res) => {
-  console.log(req.file);
+  // console.log(req.file);
   const { _id } = req.user;
     // validateMongodbId(req.body.user);
   //Check for bad words
@@ -31,16 +31,16 @@ const createPostCtrl = expressAsyncHandler(async (req, res) => {
 
 
   // //1. Get the oath to img
-  // const localPath = `public/images/posts/${req.file.filename}`;
+  const localPath = `public/images/posts/${req.file.filename}`;
   // //2.Upload to cloudinary
-  // const imgUploaded = await cloudinaryUploadImg(localPath);
+   const imgUploaded = await cloudinaryUploadImg(localPath);
   try {
     const post = await Post.create({
       ...req.body,
-      // image: imgUploaded?.url,
       user: _id,
+      image: imgUploaded?.url
     });
-    // console.log(post);
+  
     res.json(post);
     //Remove uploaded img
     // fs.unlinkSync(localPath);

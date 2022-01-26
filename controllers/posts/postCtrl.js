@@ -57,10 +57,10 @@ const fetchPostsCtrl = expressAsyncHandler(async (req, res) => {
   try {
     //check if it has category
     if(hasCategory) {
-      const posts = await Post.find({category: hasCategory}).populate('user');
+      const posts = await Post.find({category: hasCategory}).populate('user').populate('comments');
       res.json(posts);
     }else{
-      const posts = await Post.find({}).populate('user');
+      const posts = await Post.find({}).populate('user').populate('comments');
       res.json(posts);
     }
     
@@ -78,7 +78,7 @@ const fetchPostCtrl = expressAsyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongodbId(id);
     try {
-        const post = await await Post.findById(id).populate('user').populate('disLikes').populate('likes');
+        const post = await await Post.findById(id).populate('user').populate('disLikes').populate('likes').populate('comments');
         //update number of views. calculate how many times the end point hit.
         await Post.findByIdAndUpdate(id, {
             $inc: {numViews: 1},
@@ -98,7 +98,6 @@ const fetchPostCtrl = expressAsyncHandler(async (req, res) => {
 //-------------------------------
 
 const updatePostCtrl = expressAsyncHandler(async(req, res) => {
-    console.log(req.user);
     const {id} = req.params;
     validateMongodbId(id);
     try {

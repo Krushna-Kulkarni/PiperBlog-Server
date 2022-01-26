@@ -11,7 +11,7 @@ const categoryRoute = express.Router();
 
 categoryRoute.post('/',authMiddleware,createCategoryCtrl);
 
-categoryRoute.get('/',authMiddleware,fetchCategoriesCtrl);
+categoryRoute.get('/',fetchCategoriesCtrl);
 
 
 categoryRoute.get('/:id',authMiddleware,fetchCategoryCtrl);

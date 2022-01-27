@@ -374,6 +374,7 @@ const profilePhotoUploadCtrl = expressAsyncHandler(async (req, res) => {
   //Find the login user
   const { _id } = req.user;
 
+
   //1. Get the oath to img
   const localPath = `public/images/profile/${req.file.filename}`;
   //2.Upload to cloudinary

@@ -278,8 +278,8 @@ const generateVerificationTokenCtrl = expressAsyncHandler(async (req, res) => {
 
     const resetURL = `If you were requested to verify your account, verify now within 10 minutes, otherwise ignore this message <a href="http://localhost:3000/verify-account/${verificationToken}">Click to verify your account</a>`;
     const msg = {
-      to: "ffdfd@gmail.com",
-      from: "krushnakulkarni17@gmail.com",
+      to: user?.email,
+      from: "project.piperblog@gmail.com",
       subject: "Verify your account",
       html: resetURL,
     };

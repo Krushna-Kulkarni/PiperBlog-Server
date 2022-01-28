@@ -44,7 +44,7 @@ userRoutes.put("/unfollow", authMiddleware, unfollowUserCtrl);
 userRoutes.put("/block-user/:id", authMiddleware, blockUserCtrl);
 userRoutes.put("/unblock-user/:id", authMiddleware, unBlockUserCtrl);
 userRoutes.get("/profile/:id", authMiddleware, userProfileCtrl); ///some bug here 24/12 2:21 AM
-userRoutes.put("/:id", authMiddleware, updateUserCtrl);
+userRoutes.put("/", authMiddleware, updateUserCtrl);
 userRoutes.delete("/:id", deleteUsersCtrl);
 userRoutes.get("/:id", fetchUserDetailsCtrl);
 

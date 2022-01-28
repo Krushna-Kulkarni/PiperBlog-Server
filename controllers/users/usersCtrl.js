@@ -49,6 +49,7 @@ const loginUserCtrl = expressAsyncHandler(async (req, res) => {
       profilePhoto: userFound?.profilePhoto,
       isAdmin: userFound?.isAdmin,
       token: generateToken(userFound?._id),
+      isVerified: userFound?.isAccountVerified,
     });
   } else {
     res.status(401);
@@ -165,22 +166,22 @@ const followingUserCtrl = expressAsyncHandler(async (req, res) => {
   //2. Update the login user following field
   const { followId } = req.body;
   const loginUserId = req.user.id;
-
+  
   //find the target user and check if the login id exist
   const targetUser = await User.findById(followId);
+  const targetUserFollower = targetUser?.followers?.find(
+    user => user)
+  const alreadyFollowing = (targetUserFollower?.toString() === loginUserId.toString())
+  console.log(alreadyFollowing);
 
-  const alreadyFollowing = targetUser?.followers?.find(
-    user => user?.toString() === loginUserId.toString()
-  );
-
-  if (alreadyFollowing) throw new Error("You have already followed this user");
+  if(alreadyFollowing) throw new Error("You have already followed this user");
 
   //1. Find the user you want to follow and update it's followers field
   await User.findByIdAndUpdate(
     followId,
     {
       $push: { followers: loginUserId },
-      isFollowing: true,
+      isFollowing:true,
     },
     { new: true }
   );

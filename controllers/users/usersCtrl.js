@@ -119,9 +119,9 @@ const userProfileCtrl = expressAsyncHandler(async (req, res) => {
       user => user)
 
 
-    const alreadyViewed = () =>{
-      return (myProfileViewer?.toString() === loginUserId?.toString())
-    }
+      const alreadyViewed = () =>{
+        return (myProfileViewer?.toString() === loginUserId?.toString())
+      }
 
     if (alreadyViewed) {
       res.json(myProfile);
